@@ -66,8 +66,9 @@ for line in input_file:
 for line in input_file:
     if "-------------------" in line:
         break
-    print(" ".join(line.split()))
     fields.append(line.split())
+
+input_file.close()
 
 # Add Blank rows 4 6 10
 for row in fields:
@@ -84,4 +85,4 @@ with output_file as csvfile:
     # Writes the fields
     csvwriter.writerows(fields)
 
-print(fields)
+print("Wrote to -> ", os.path.abspath(sys.argv[2]))
