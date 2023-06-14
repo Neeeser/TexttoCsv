@@ -73,9 +73,9 @@ input_file.close()
 
 # Add Blank rows 4 6 10
 for row in fields:
-    row.insert(3, "")
-    row.insert(5, "")
-    row.insert(9, "")
+    row.insert(3, " ")
+    row.insert(5, "  ")
+    row.insert(9, "   ")
 
 
 # Write fields to csv file
@@ -93,6 +93,11 @@ output_file.close
 if "-x" in sys.argv or "--Xcel" in sys.argv:
     name_no_extension = sys.argv[2].split(".")
 
-    csv = pandas.read_csv(sys.argv[2], delimiter=',').to_excel(name_no_extension[0] + ".xlsx", index=False)
+    csv = pandas.read_csv(
+        sys.argv[2],
+        delimiter=",",
+    )
+    
+    csv = csv.rename({"Unnamed: 3": "Blank", "Unnamed: 5": "NewName2"})
 
-
+    csv.to_excel(name_no_extension[0] + ".xlsx", index=False)
