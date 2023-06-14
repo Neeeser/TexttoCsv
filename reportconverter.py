@@ -4,11 +4,12 @@
 import sys
 import os
 import csv
+import pandas
 
 # Checks if there are enough args
 if len(sys.argv) < 3:
     print(
-        "Usage ./reportconverter input.txt nameofoupt.csv \n   options:\n     -o, --Overwrite      Automatically overwrites outputfile"
+        "Usage ./reportconverter input.txt nameofoupt.csv \n   options:\n     -o, --Overwrite      Automatically overwrites outputfile\n     -x, --Xcel      Converts to excel format"
     )
     sys.exit(1)
 
@@ -86,3 +87,12 @@ with output_file as csvfile:
     csvwriter.writerows(fields)
 
 print("Wrote to -> ", os.path.abspath(sys.argv[2]))
+
+output_file.close
+
+if "-x" in sys.argv or "--Xcel" in sys.argv:
+    name_no_extension = sys.argv[2].split(".")
+
+    csv = pandas.read_csv(sys.argv[2], delimiter=',').to_excel(name_no_extension[0] + ".xlsx", index=False)
+
+
