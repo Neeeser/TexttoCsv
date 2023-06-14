@@ -69,6 +69,13 @@ for line in input_file:
     print(" ".join(line.split()))
     fields.append(line.split())
 
+# Add Blank rows 4 6 10
+for row in fields:
+    row.insert(3, "")
+    row.insert(5, "")
+    row.insert(9, "")
+
+
 # Write fields to csv file
 with output_file as csvfile:
     # Creates csv
