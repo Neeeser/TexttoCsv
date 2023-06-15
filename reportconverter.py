@@ -55,7 +55,7 @@ fields = [
 ]
 
 number_breaks = 0
-# Reads lines up until the fields
+# Reads lines up until the trades
 for line in input_file:
     if "-------------------" in line:
         number_breaks += 1
@@ -97,7 +97,5 @@ if "-x" in sys.argv or "--Xcel" in sys.argv:
         sys.argv[2],
         delimiter=",",
     )
-    
-    csv = csv.rename({"Unnamed: 3": "Blank", "Unnamed: 5": "NewName2"})
 
     csv.to_excel(name_no_extension[0] + ".xlsx", index=False)
